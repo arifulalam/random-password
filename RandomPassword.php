@@ -11,6 +11,16 @@ class RandomPassword{
 	public $characterSet;
 	
 	function __construct($characters = 12, $mix = 'alphanumeric') {
+		if(empty($characters) || (int)$characters === 0){
+			$this->code = 'Length not passed or set to zero';
+			return;
+		}
+		
+		if(empty($mix) || !in_array($mix, array('alphanumeric','alpha','numeric','mix'))){
+			$this->code = 'Letters group not passed or set to empty. Letter groups are alphanumeric, alpha, numeric or mix';
+			return;
+		}
+		
 		$this->alphanumeric = $this->numeric . $this->alpha;
 		$this->power = $this->alphanumeric . $this->special;
 
